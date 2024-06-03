@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import asyncHandler from '../middlewares/asyncHandler.js';
 import createToken from '../utils/createToken.js'; // Assuming this is your token generation utility
 
+
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   // Validate input
@@ -39,13 +40,48 @@ const createUser = asyncHandler(async (req, res) => {
     
   }
 
-  // Generate a token and set it as a cookie
 });
 
 const loginUser = asyncHandler(async(req,res)=>{
     const {email,password} = req.body;
     const existingUser = await User.findOne({email})
     console.log(existingUser)
+  if (existingUser){
+    const isPasswordValid = await bcrypt.compare(password,existingUser.password)
+
+    if (isPasswordValid){
+      createToken(res,existingUser._id)
+
+      res.status(201).json({
+        _id : existingUser._id,
+        username : existingUser.username,
+        email : existingUser.email,
+        isAdmin :  existingUser.isAdmin,
+    })
+    }
+    else{
+        res.status(401).json({message:"Invalid Password"})
+    }
+
+  }
+  else{
+    res.status(401).json({message: "user not found "})
+    
+  }
 })
 
-export { createUser ,loginUser };
+const logoutCurrentUser = asyncHandler(async(req,res)=>{
+  res.cookie('jwt','',{
+    http : true,
+    expires : new Date(0)
+
+  })
+  res.status(200).json({message:"logout successfully"})
+})
+
+const getAllusers = asyncHandler(async(req,res)=>{
+  const users = await User.findOne({});
+  res.json(users);
+})
+
+export { createUser ,loginUser, logoutCurrentUser, getAllusers };

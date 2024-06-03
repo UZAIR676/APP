@@ -3,7 +3,7 @@ import User from '../models/User.js';
 import asyncHandler from './asyncHandler.js';
 
 // if the user is authenticated or not 
-const authenticated = asyncHandler(async (req, res, next) => {
+const authenticate = asyncHandler(async (req, res, next) => {
     let token;
 
     token = req.cookies.jwt;
@@ -32,4 +32,4 @@ const authorizeAdmin = (req, res, next) => {
     }
 };
 
-export { authenticated, authorizeAdmin };
+export { authenticate, authorizeAdmin };
