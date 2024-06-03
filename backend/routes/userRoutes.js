@@ -1,14 +1,18 @@
 // userRoutes.js
 import express from 'express';
-import { createUser, loginUser , logoutCurrentUser, getAllusers} from '../controllers/userController.js'; // Adjust the path based on your project structure
+import { createUser, loginUser , logoutCurrentUser, getAllUsers,getcurrentUser} from '../controllers/userController.js';
+import { authenticated, authorizeAdmin } from '../middlewares/authMiddleware.js';
 
-import { authenticate,authorizeAdmin } from '../middlewares/authMiddleware.js';
 const router = express.Router();
 
-router.route('/').post(createUser).get(authenticate,authorizeAdmin,getAllusers);
+router.route('/',createUser).get(authenticated,authorizeAdmin,getAllUsers)
 
-router.post('/auth',loginUser)
-router.post('/logout',logoutCurrentUser)
+// Route to authenticate a user
+router.post('/auth', loginUser);
 
+// Route to logout a user
 
+router.post('/logout', logoutCurrentUser);
+
+router.route("/profile").get(authenticated,getcurrentUser)
 export default router;

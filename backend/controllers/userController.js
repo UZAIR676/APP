@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import asyncHandler from '../middlewares/asyncHandler.js';
 import createToken from '../utils/createToken.js'; // Assuming this is your token generation utility
 
-
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   // Validate input
@@ -76,12 +75,16 @@ const logoutCurrentUser = asyncHandler(async(req,res)=>{
     expires : new Date(0)
 
   })
-  res.status(200).json({message:"logout successfully"})
+  res.status(200).json({message:"logged out successfully"})
+})
+const getAllUsers = asyncHandler(async (req, res, next) => {
+  const users = await User.find({});
+  res.status(200).json(users);
+});
+
+const getcurrentUser = asyncHandler(async(req,res)=>{
+const user =   await User.findById(req.user._id)
+console.log(user)
 })
 
-const getAllusers = asyncHandler(async(req,res)=>{
-  const users = await User.findOne({});
-  res.json(users);
-})
-
-export { createUser ,loginUser, logoutCurrentUser, getAllusers };
+export { createUser ,loginUser, logoutCurrentUser ,getAllUsers,getcurrentUser};
