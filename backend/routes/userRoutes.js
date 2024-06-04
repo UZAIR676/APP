@@ -1,9 +1,11 @@
 // userRoutes.js
 import express from 'express';
-import { createUser, loginUser , logoutCurrentUser, getAllUsers,getcurrentUser} from '../controllers/userController.js';
+import { createUser, loginUser , logoutCurrentUser, getAllUsers,getcurrentUser,updateCurrentUserProfile} from '../controllers/userController.js';
 import { authenticated, authorizeAdmin } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
+
+router.post('/', createUser);
 
 router.route('/',createUser).get(authenticated,authorizeAdmin,getAllUsers)
 
@@ -14,5 +16,5 @@ router.post('/auth', loginUser);
 
 router.post('/logout', logoutCurrentUser);
 
-router.route("/profile").get(authenticated,getcurrentUser)
+router.route("/profile").get(authenticated,getcurrentUser).get(authenticated,updateCurrentUserProfile)
 export default router;
