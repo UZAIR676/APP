@@ -9,3 +9,9 @@ body{
 .custom-icon {
     color: rgb(255, 255, 255);
 }
+
+
+input{
+    color: rgb(26, 28, 28);
+    font-style: italic;
+}
