@@ -9,7 +9,7 @@ import  path from 'path'
 
 import connectDB from "./confiq/db.js"
 import userRoutes from "./routes/userRoutes.js"
-import genreRoutes from './models/Genre.js'
+import genreRoutes from './routes/genreRoutes.js'
 
 
 
