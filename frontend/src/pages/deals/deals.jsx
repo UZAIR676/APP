@@ -1,11 +1,11 @@
 import React from 'react'
 
-const home = () => {
+const deals = () => {
   return (
     <div>
-      home 
+      
     </div>
   )
 }
 
-export default home
+export default deals

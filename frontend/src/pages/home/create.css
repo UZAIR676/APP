@@ -1,0 +1,79 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .create-special-container {
+    margin-top:20px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-special-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .create-special-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .create-special-form label {
+    margin-bottom: 15px;
+  }
+  
+  .create-special-form input,
+  .create-special-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000;
+  }
+  
+  .create-special-form textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  .create-special-form button {
+    padding: 15px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .create-special-form button:hover {
+    background-color: #e3c9c9;
+    color: #ff0000;
+  }
+  
+  .success-message {
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

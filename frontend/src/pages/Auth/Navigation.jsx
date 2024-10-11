@@ -1,114 +1,124 @@
 import React, { useState } from 'react';
-import { AiOutlineHome, AiOutlineLogin, AiOutlineUserAdd } from 'react-icons/ai';
+import { AiOutlineHome, AiOutlineMenu, AiOutlineUserAdd, AiOutlineLogin } from 'react-icons/ai';
+import { FaPizzaSlice, FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/features/auth/authSlide';
-import { MdOutlineLocalMovies } from 'react-icons/md';
+
 
 const Navigation = () => {
     const { userInfo } = useSelector((state) => state.auth);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
+    const handleLogout = () => {
+        dispatch(logout());
+        window.location.href = '/login';
     };
 
-    const handleLogout = () => {
-        // Dispatch logout action
-        dispatch(logout());
-        // Redirect to login or home page after logout
-        // navigate('/login'); // If you're using useNavigate from react-router-dom
-        // Or
-        // window.location.href = '/login'; // Redirect using window location
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     return (
-        <div className='fixed bottom-10 left-[30rem] transform translate-x-1/2 translate-y-1/2 z-50 bg-[#0f0f0f] border w-[30%] px-[4rem] mb-[2rem] rounded'> 
-            <section className="flex justify-between items-center">
-                {/* Home and Shop links */}
-                <div className='flex items-center mb-[2rem]'>
-                    <Link to='/' className='flex items-center transition-transform transform hover:translate-x-2'>
-                        <AiOutlineHome className='mr-2 mt-[3rem] custom-icon' size={26} />
-                        <span className='hidden nav-item-name mt-[3rem]'>HOME</span>
-                    </Link>
+        <nav className="backdrop-blur-md text-white p-4 shadow-lg fixed w-full z-50">
+            <div className="container mx-auto flex justify-between items-center">
+                {/* Logo */}
+                <Link to="/" className="text-2xl font-bold hover:text-red-500 flex items-center">
+                    <AiOutlineHome size={24} className="mr-2" />
+                    FoodieApp
+                </Link>
 
-                    <Link to='/movies' className='flex items-center transition-transform transform hover:translate-x-2 ml-[1rem]'>
-                        <MdOutlineLocalMovies className='mr-2 mt-[3rem] custom-icon' size={26} />
-                        <span className='hidden nav-item-name mt-[3rem]'>SHOP</span>
-                    </Link>
+                {/* Desktop Links */}
+                <div className="hidden md:flex items-center space-x-6">
+                    <Link to="/" className="text-xl font-semibold hover:text-red-600">Home</Link>
+                    <Link to="/menu" className="text-xl font-semibold hover:text-red-600">Menu</Link>
+                    <Link to="/about" className="text-xl font-semibold hover:text-red-600">About</Link>
                 </div>
 
-                {/* Dropdown for user information */}
-                <div className='relative'>
-                    <button onClick={toggleDropdown} className='text-gray-800 focus:outline-none'>
-                        {userInfo ? (
-                            <span className='text-white'>{userInfo.username}</span>
-                        ) : (
-                            <></>
-                        )}
-                        {userInfo && (
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={`h-4 w-4 ml-1 ${
-                                    dropdownOpen ? "transform rotate-180" : ""
-                                }`}
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="white"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d={dropdownOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-                                />
-                            </svg>
-                        )}
-                    </button>
+                {/* Cart and User Actions */}
+                <div className="hidden md:flex items-center space-x-6">
+                    <Link to="/cart" className="text-xl font-semibold hover:text-red-600 flex items-center">
+                        <FaShoppingCart size={24} className="mr-2" />
+                        Cart
+                    </Link>
+                    {userInfo ? (
+                        <div className="relative">
+                            <button onClick={toggleMenu} className="text-lg font-semibold flex items-center">
+                                {userInfo.username}
+                                <AiOutlineMenu className="ml-2" />
+                            </button>
+                            {/* Dropdown Menu */}
+                            {isMenuOpen && (
+                                <div className="absolute right-0 mt-2 bg-black rounded shadow-lg w-48 py-2">
+                                    <Link to="/profile" className="block px-4 py-2 hover:bg-red-600">Profile</Link>
+                                    {userInfo.isAdmin && (
+                                        <>
+                                            <Link to="/admin/dashboard" className="block px-4 py-2 hover:bg-red-600">Admin Dashboard</Link>
+                                            <Link to="/createspecial" className="block px-4 py-2 hover:bg-red-600">Special Offers</Link>
+                                            <Link to="/op" className="block px-4 py-2 hover:bg-red-600">menu managment </Link>
+                                            <Link to="/order" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">orders</Link>
+                                        </>
+                                    )}
+                                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-600">Logout</button>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <>
+                            <Link to="/login" className="text-xl font-semibold hover:text-red-600 flex items-center">
+                                <AiOutlineLogin size={24} className="mr-2" />
+                                Login
+                            </Link>
+                        </>
+                    )}
+                </div>
 
-                    {dropdownOpen && userInfo && (
-                        <ul className={`absolute right-0 mt-2 mr-14 w-[10] space-y-2 text-grey-600 ${!userInfo.isAdmin ? '-top-20' : '-top-24'}`}>
+                {/* Mobile Menu Button */}
+                <div className="md:hidden flex items-center">
+                    <button onClick={toggleMobileMenu} className="text-white hover:text-red-300">
+                        <AiOutlineMenu size={28} />
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile Menu */}
+            {isMobileMenuOpen && (
+                <div className="md:hidden backdrop-blur-md text-white space-y-2 py-4">
+                    <Link to="/" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">Home</Link>
+                    <Link to="/menu" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">Menu</Link>
+                    <Link to="/about" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">About</Link>
+                    
+                    <Link to="/cart" className="text-xl font-semibold hover:bg-red-500 px-4 py-2 flex items-center">
+                        <FaShoppingCart size={24} className="mr-2" />
+                        Cart
+                    </Link>
+                    {userInfo ? (
+                        <>
+                            <Link to="/profile" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">Profile</Link>
                             {userInfo.isAdmin && (
                                 <>
-                                    <li>
-                                        <Link to='/admin/movies/dashboard' className='black px-4 py-2 hover:bg-grey-100 '>Dashboard</Link>
-                                    </li>
+                                    <Link to="/admin/dashboard" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">Admin Dashboard</Link>
+                                    <Link to="/createspecial" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">Special Offers</Link>
+                                    <Link to="/order" className="block text-xl font-semibold hover:bg-red-500 px-4 py-2">orders</Link>
                                 </>
                             )}
-
-                            <li>
-                                <Link to='/profile' className='block px-4 py-2 hover:bg-gray-100'>
-                                    Profile
-                                </Link>
-                            </li>
-
-                            <li>
-                                <button onClick={handleLogout} className='block w-full px-4 py-2 text-left hover:bg-gray-100'>Logout</button>
-                            </li>
-                        </ul>
-                    )}
-
-                    {/* Conditional rendering for login and register links */}
-                    {!userInfo && (
-                        <ul className='flex'>
-                            <li>
-                                <Link to='/login' className='flex items-center mt-5 transition-transform transform hover:translate-x-2 mb-[2rem]'>
-                                    <AiOutlineLogin className='mr-2 mt-[4px]'size={26}/>
-                                    <span className='hidden nav-item-name'>LOGIN</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to='/register' className='flex items-center mt-5 transition-transform transform hover:translate-x-2 ml-[1rem]'>
-                                    <AiOutlineUserAdd size={26}/>
-                                    <span className='hidden nav-item-name'>Register</span>
-                                </Link>
-                            </li>
-                        </ul>
+                            <button onClick={handleLogout} className="block text-left w-full text-xl font-semibold hover:bg-red-500 px-4 py-2">Logout</button>
+                        </>
+                    ) : (
+                        <Link to="/login" className="text-xl font-semibold hover:bg-red-500 px-4 py-2 flex items-center">
+                            <AiOutlineLogin size={24} className="mr-2" />
+                            Login
+                        </Link>
                     )}
                 </div>
-            </section>
-        </div>
+            )}
+        </nav>
     );
 };
 

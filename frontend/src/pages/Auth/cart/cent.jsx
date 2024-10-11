@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GenreList = () => {
+const cent = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const GenreList = () => {
   )
 }
 
-export default GenreList
+export default cent

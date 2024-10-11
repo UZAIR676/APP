@@ -9,7 +9,11 @@ import  path from 'path'
 
 import connectDB from "./confiq/db.js"
 import userRoutes from "./routes/userRoutes.js"
-import genreRoutes from './routes/genreRoutes.js'
+import SpecialProductRoutes from "./routes/specialProductRoutes.js"
+import menuRoutes from "./routes/menuRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js"
+
+
 
 
 
@@ -28,7 +32,11 @@ const PORT = process.env.PORT || 3000
 
 
 app.use("/api/v1/users",userRoutes)
-app.use('/api/v1/genre',genreRoutes)
+app.use("/api/v1/special",SpecialProductRoutes)
+app.use("/api/v1/menu",menuRoutes)
+app.use("/api/v1/order",orderRoutes)
+
+
 
 
 app.listen(PORT, ()=>{

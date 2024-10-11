@@ -1,0 +1,157 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  
+  }
+  
+  .home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 20px;
+  }
+  
+  .home-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .text-section {
+    padding: 40px;
+    max-width: 600px;
+  }
+  
+  .heading {
+    font-size: 3rem;
+    color: #e74c3c;
+    margin-bottom: 20px;
+  }
+  
+  .subheading {
+    font-size: 1.5rem;
+    color: #f4f4f4;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+    color: #7a6e6e;
+    margin-bottom: 30px;
+  }
+  
+  .order-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .order-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .image-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+ 
+  }
+  
+  .pizza-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  #sp{
+    width: 15%;
+    background-color:white;
+    border-radius:20%;
+    
+  }
+  .special-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .special-product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .product-name {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .product-description {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .product-price {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .home-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .text-section {
+      padding: 20px;
+    }
+  
+    .heading {
+      font-size: 2.5rem;
+    }
+  
+    .order-button {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+    #sp{
+      width: 35%;
+      margin-left: 104px;
+     
+      
+    }
+    #sp h1{
+      margin-left: 20px;
+    }
+  }
+
+  

@@ -6,7 +6,7 @@ const AdminRoute = () => {
 
   return userInfo && userInfo.isAdmin?(
     <Outlet/>
-  ):(<Navigate to="/login"/>)
+  ):(<Navigate to="/login" replace />)
  
 };
 

@@ -1,13 +1,10 @@
-import React from 'react'
+import React from 'react';
+import './loader.css';
 
-const loader = () => {
+const Loader = () => {
   return (
-    <div className='animation-spin rounded-full  h-12 w-16 border-t-4 boarder-teal-400 border-opacity-50'>
-        loading..........
-
-    </div>
-
-  )
+    <div className="loader"></div>
+  );
 }
 
-export default loader
+export default Loader;

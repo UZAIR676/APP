@@ -37,67 +37,63 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <div className="container mx-auto p-4 mt-[2rem] ">
-        <div className="flex justify-center align-center md:flex md:space-x-4">
-          <div className="md:w-1/3">
-            <h2 className="text-2xl font-semibold mb-4">Update Profile</h2>
-            <form onSubmit={submitHandler}>
-              <div className="mb-4">
-                <label className="block text-white mb-2">Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter name"
-                  className="form-input p-4 rounded-sm w-full"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-white mb-2">Email Address</label>
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  className="form-input p-4 rounded-sm w-full"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-white mb-2">Password</label>
-                <input
-                  type="password"
-                  placeholder="Enter password"
-                  className="form-input p-4 rounded-sm w-full"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-white mb-2">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  className="form-input p-4 rounded-sm w-full"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
+    <div className="container mx-auto p-4">
+      <div className="flex justify-center items-center">
+        <div className="w-full max-w-md p-4 mt-10 shadow-md rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4">Update Profile</h2>
+          <form onSubmit={submitHandler}>
+            <div className="mb-4">
+              <label className="block text-white mb-2">Name</label>
+              <input
+                type="text"
+                placeholder="Enter name"
+                className="form-input p-4 rounded-sm w-full"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2">Email Address</label>
+              <input
+                type="email"
+                placeholder="Enter email"
+                className="form-input p-4 rounded-sm w-full"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2">Password</label>
+              <input
+                type="password"
+                placeholder="Enter password"
+                className="form-input p-4 rounded-sm w-full"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white mb-2">Confirm Password</label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                className="form-input p-4 rounded-sm w-full"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
 
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-teal-500 w-screen mt-[2rem] font-bold text-white py-2 px-4 rounded hover:bg-teal-600"
-                >
-                  Update
-                </button>
+            <div className="flex justify-between items-center">
+              <button
+                type="submit"
+                className="bg-red-500 font-bold text-white py-2 px-4 rounded hover:bg-red-600 w-full mt-4"
+              >
+                {loadingUpdateProfile ? 'Updating...' : 'Update'}
+              </button>
 
-                {loadingUpdateProfile && <Loader />}
-              </div>
-            </form>
-          </div>
+              {loadingUpdateProfile && <Loader className="ml-4" />}
+            </div>
+          </form>
         </div>
       </div>
     </div>

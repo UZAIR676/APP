@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials } from '../../redux/features/auth/authSlide'; // Import setCredentials
+import { setCredentials } from '../../../redux/features/auth/authSlide'; // Import setCredentials
 import { toast } from 'react-toastify'; // Import toast
-import { useRegisterMutation } from '../../redux/api/user';
-import Loader from '../../components/loader';
+import { useRegisterMutation } from '../../../redux/api/user';
+import Loader from '../../../components/loader';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -42,17 +42,20 @@ const Register = () => {
   };
 
   return (
-    <div className='flex'>
+    <div className='flex flex-col md:flex-row items-center justify-center min-h-screen'>
+      {/* Image Section */}
       <img
-        src="https://media.istockphoto.com/id/1295114854/photo/empty-red-armchairs-of-a-theater-ready-for-a-show.jpg?s=612x612&w=0&k=20&c=0rDtwzMmLbqe_8GuGw2dpjkD0MsXGywJmdmg0jDbMxQ="
-        alt=""
-        className='h-[40rem] w-[40%] xl:block md:hidden sm:hidden rounded-lg'
+        src="https://static.vecteezy.com/system/resources/thumbnails/023/007/593/small_2x/pizza-veggie-italian-pizza-with-mozzarella-olives-sausage-and-vegetables-on-black-background-ai-generated-photo.jpg"
+        alt="Pizza"
+        className='hidden md:block md:w-[40%] lg:w-[50%] h-auto rounded-lg'
       />
-      <div className='pl-[10rem]'>
-        <h1 className='text-2xl font-semibold mb-4'>Register</h1>
-        <form className='container w-[40rem]' onSubmit={submitHandler}>
-          <div className="my-[2rem]">
-            <label htmlFor="username" className='block text-sm font-medium text-white'>Username</label>
+      
+      {/* Form Section */}
+      <div className='w-full md:w-[60%] lg:w-[50%] p-6 md:p-10'>
+        <h1 className='text-2xl font-semibold mb-6 text-center md:text-left'>Register</h1>
+        <form className='space-y-6' onSubmit={submitHandler}>
+          <div>
+            <label htmlFor="username" className='block text-sm font-medium text-gray-700'>Username</label>
             <input
               type="text"
               id='username'
@@ -62,8 +65,8 @@ const Register = () => {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="my-[2rem]">
-            <label htmlFor="email" className='block text-sm font-medium text-white'>Email</label>
+          <div>
+            <label htmlFor="email" className='block text-sm font-medium text-gray-700'>Email</label>
             <input
               type="email"
               id='email'
@@ -73,8 +76,8 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="my-[2rem]">
-            <label htmlFor="password" className='block text-sm font-medium text-white'>Password</label>
+          <div>
+            <label htmlFor="password" className='block text-sm font-medium text-gray-700'>Password</label>
             <input
               type="password"
               id='password'
@@ -84,8 +87,8 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="my-[2rem]">
-            <label htmlFor="confirmPassword" className='block text-sm font-medium text-white'>Confirm Password</label>
+          <div>
+            <label htmlFor="confirmPassword" className='block text-sm font-medium text-gray-700'>Confirm Password</label>
             <input
               type="password"
               id='confirmPassword'
@@ -97,14 +100,14 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className='bg-teal-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem]'>
+            className='bg-red-700 w-full text-white px-4 py-2 rounded hover:bg-red-800'>
             {isLoading ? "registering..." : 'Register'}
           </button>
           {isLoading && <Loader />} {/* Rendering the Loader component if isLoading is true */}
         </form>
-        <div className='mt-4'>
+        <div className='mt-6 text-center'>
           <p>
-            Already have an account? <Link to={`/login?redirect=${redirect}`} className='text-teal-500 hover:underline'>Login</Link>
+            Already have an account? <Link to={`/login?redirect=${redirect}`} className='text-red-700 hover:underline'>Login</Link>
           </p>
         </div>
       </div>
